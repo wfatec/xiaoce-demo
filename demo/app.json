@@ -1,11 +1,11 @@
 {
   "pages": [
+    "pages/map/index",
     "pages/login/index",
     "pages/broadcast/index",
     "pages/broadcast_next/index",
     "pages/animation/index",
     "pages/share/index",
-    "pages/map/index",
     "pages/echarts/index",
     "pages/canvas/index",
     "pages/packages/index"
