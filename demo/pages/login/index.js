@@ -6,7 +6,10 @@ Page({
     btnText: '开始',
     isProtocol: false,
     isLogin: false,
-    isActive: -1
+    isActive: -1,
+    isLogin: false,
+    phoneNo: '',
+    smscode: ''
   },
   onLoad (option) {
   },
@@ -29,7 +32,19 @@ Page({
     let isValid = /^1[3456789]\d{9}$/.test(phoneNo);
     if (isValid) {
       this.setData({
-        isActive: 1
+        isActive: 1,
+        phoneNo: phoneNo
+      })
+    }
+  },
+  isCodeNull: function(e){
+    let smscode = e.detail.value
+    // 正则验证
+    let isValid = /^\d{6}$/.test(smscode);
+    if (isValid) {
+      this.setData({
+        isLogin: true,
+        smscode: smscode
       })
     }
   },
@@ -38,6 +53,29 @@ Page({
     wx.request({
       url: 'https://path/to/sendcode',
       success(res) {
+      }
+    })
+  },
+  login: function(){
+    // 登陆
+    wx.login({
+      success(res) {
+        let jscode = res.code
+        wx.request({
+          url: 'https://path/to/smslogin',
+          data: {
+            jscode,
+            smscode: self.data.smscode,
+            phoneNo: self.data.phoneNo
+          },
+          success(res) {
+            // 登录成功
+            let {
+              userid,
+              accesstoken
+            } = res
+          }
+        })
       }
     })
   }
