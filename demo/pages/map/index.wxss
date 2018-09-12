@@ -39,8 +39,17 @@
 .tab-wrapper.tab-size-2.tab-active-1 .bar {
   -webkit-transform: translate3d(512rpx, 0, 0);
 }
+.flex-box{
+  display: -webkit-flex; /* Safari */
+  display: flex;
+  justify-content: center;
+  align-items:flex-end;
+}
 .form-wrapper{
   border-color: #FF4611;
-  width: 400rpx;
+  background: #ffffff;
+  width: 90%;
   height: 300rpx;
+  
+  
 }

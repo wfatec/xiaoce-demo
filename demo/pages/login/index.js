@@ -36,7 +36,8 @@ Page({
     if (isValid) {
       this.setData({
         isActive: 1,
-        tel: tel
+        tel: tel,
+        count:60
       })
     }
   },
@@ -45,6 +46,7 @@ Page({
     // 正则验证
     let isValid = /^\d{6}$/.test(randomCode);
     if (isValid) {
+      clearTimeout(timer)
       this.setData({
         isLogin: true,
         randomCode: randomCode
@@ -83,10 +85,12 @@ Page({
         if (isValid) {
           self.setData({
             isActive: 1,
+            count: 60
           })
         }else{
           self.setData({
-            isActive: -1
+            isActive: -1,
+            count: 60
           })
         }
         return

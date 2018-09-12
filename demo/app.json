@@ -1,7 +1,8 @@
 {
   "pages": [
-    "pages/login/index",
     "pages/map/index",
+    "pages/login/index",
+    
     "pages/broadcast/index",
     "pages/broadcast_next/index",
     "pages/animation/index",
