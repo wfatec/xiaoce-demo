@@ -39,3 +39,8 @@
 .tab-wrapper.tab-size-2.tab-active-1 .bar {
   -webkit-transform: translate3d(512rpx, 0, 0);
 }
+.form-wrapper{
+  border-color: #FF4611;
+  width: 400rpx;
+  height: 300rpx;
+}

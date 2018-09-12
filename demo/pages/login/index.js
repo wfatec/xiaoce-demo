@@ -1,3 +1,4 @@
+let timer = null;
 Page({
   data: {
     isQuickLogin: true,
@@ -8,8 +9,10 @@ Page({
     isLogin: false,
     isActive: -1,
     isLogin: false,
-    phoneNo: '',
-    smscode: ''
+    tel: '',
+    randomCode : '',
+    identify: '',
+    count:60,
   },
   onLoad (option) {
   },
@@ -27,53 +30,86 @@ Page({
     // 确认登录
   },
   isPhone: function(e) {
-    let phoneNo = e.detail.value
+    let tel = e.detail.value
     // 正则验证
-    let isValid = /^1[3456789]\d{9}$/.test(phoneNo);
+    let isValid = /^1[3456789]\d{9}$/.test(tel);
     if (isValid) {
       this.setData({
         isActive: 1,
-        phoneNo: phoneNo
+        tel: tel
       })
     }
   },
   isCodeNull: function(e){
-    let smscode = e.detail.value
+    let randomCode = e.detail.value
     // 正则验证
-    let isValid = /^\d{6}$/.test(smscode);
+    let isValid = /^\d{6}$/.test(randomCode);
     if (isValid) {
       this.setData({
         isLogin: true,
-        smscode: smscode
+        randomCode: randomCode
       })
     }
   },
   getCode: function(){
+    let self = this;
+    self.countDown();
+    self.setData({
+      isActive: 2,
+    })
     // 获取验证码
     wx.request({
-      url: 'https://path/to/sendcode',
+      url: 'http://47.94.0.63/shared/randomCode',
+      data:{
+        tel: self.data.tel
+      },
       success(res) {
+        console.log('res: ',res);
+        self.setData({
+          identify: res.data.data,
+        })
       }
     })
   },
+  countDown: function() {
+    let self = this;
+    timer = setTimeout(function () {
+      self.setData({
+        count: self.data.count-1
+      })
+      if (self.data.count<=0) {
+        // 正则验证
+        let isValid = /^1[3456789]\d{9}$/.test(self.data.tel);
+        if (isValid) {
+          self.setData({
+            isActive: 1,
+          })
+        }else{
+          self.setData({
+            isActive: -1
+          })
+        }
+        return
+      }
+      self.countDown();
+    }, 1000);
+  },
   login: function(){
+    let self = this;
     // 登陆
     wx.login({
       success(res) {
         let jscode = res.code
         wx.request({
-          url: 'https://path/to/smslogin',
+          url: 'http://47.94.0.63/customer/login',
           data: {
-            jscode,
-            smscode: self.data.smscode,
-            phoneNo: self.data.phoneNo
+            randomCode: self.data.randomCode,
+            tel: self.data.tel,
+            identify: self.data.identify
           },
           success(res) {
             // 登录成功
-            let {
-              userid,
-              accesstoken
-            } = res
+            console.log('res: ',res)
           }
         })
       }

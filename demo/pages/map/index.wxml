@@ -9,6 +9,15 @@
       </cover-view>
       <cover-view class="bar"></cover-view>
     </cover-view>
+    <cover-view class="form-wrapper">
+      <cover-view class="start-area">
+        <input cursor-spacing="{{cursorSpacing}}" maxlength="11" type="text" placeholder-style="color:#b2b2b2" placeholder="填写出发地址"/>
+      </cover-view>
+      <cover-view class="end-area">
+        
+      </cover-view>
+      <cover-view class="bar"></cover-view>
+    </cover-view>
     <block wx:for="{{controls}}" wx:key>
       <cover-image class="cover-controls" src="{{item.iconPath}}" style="{{item.style}}" data-idx="{{index}}" bindtap="onControlTap"></cover-image>
     </block>
