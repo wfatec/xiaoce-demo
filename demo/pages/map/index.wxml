@@ -3,11 +3,11 @@
     <!-- 业务tab -->
     <cover-view class="flex-box">
       <cover-view class="form-wrapper">
-        <cover-view class="start-area">
-          <input cursor-spacing="{{cursorSpacing}}" maxlength="11" type="text" placeholder-style="color:#b2b2b2" placeholder="填写出发地址"/>
+        <cover-view class="input-area start-area">
+          请输入出发位置
         </cover-view>
-        <cover-view class="end-area">
-          
+        <cover-view class="input-area end-area">
+          请输入终点位置
         </cover-view>
         <cover-view class="bar"></cover-view>
       </cover-view>
